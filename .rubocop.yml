@@ -4,7 +4,3 @@ Metrics/ClassLength:
 Style/Documentation:
   Exclude:
     - 'test/**/*'
-
-Style/RedundantSelf:
-  Exclude:
-    - 'lib/list.rb'

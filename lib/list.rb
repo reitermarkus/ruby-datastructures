@@ -22,26 +22,26 @@ class Node
   def insert_before(data)
     node = Node.new(data)
     node.next = self
-    node.prev = self.prev
+    node.prev = @prev
 
-    self.prev.next = node unless self.prev.nil?
+    @prev.next = node unless @prev.nil?
 
-    self.prev = node
+    @prev = node
   end
 
   def insert_after(data)
     node = Node.new(data)
     node.prev = self
-    node.next = self.next
+    node.next = @next
 
-    self.next.prev = node unless self.next.nil?
+    @next.prev = node unless @next.nil?
 
-    self.next = node
+    @next = node
   end
 
   def remove
-    self.prev.next = self.next unless self.prev.nil?
-    self.next.prev = self.prev unless self.next.nil?
+    @prev.next = @next unless @prev.nil?
+    @next.prev = @prev unless @next.nil?
   end
 
   def each
