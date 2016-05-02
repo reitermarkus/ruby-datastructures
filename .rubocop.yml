@@ -1,0 +1,10 @@
+Metrics/ClassLength:
+  Max: 200
+
+Style/Documentation:
+  Exclude:
+    - 'test/**/*'
+
+Style/RedundantSelf:
+  Exclude:
+    - 'lib/list.rb'
