@@ -2,24 +2,25 @@
 
 # Heap
 class Heap
-  def initialize(data = nil)
+  def initialize(*args)
     @array = []
-    @size = -1
 
-    return if data.nil?
+    return if args.all? { |x| x == nil }
 
-    data.each { |e| insert e }
+    if args.length == 1
+      if args[0].kind_of? Enumerable
+        args[0].each { |e| insert e }
+      else
+        insert args[0]
+      end
+    else
+      args.each { |e| insert e }
+    end
   end
 
   def insert(data)
-    @array[(@size += 1)] = data
-
-    c = @size
-
-    while @array[parent(c)] > @array[c]
-      @array[c], @array[parent(c)] = @array[parent(c)], @array[c]
-      c = parent(c)
-    end
+    @array[@array.length] = data
+    bubble_up(@array.length - 1)
   end
 
   def min
@@ -29,17 +30,31 @@ class Heap
   def remove_min
     data = min
 
-    @array[0] = @array[@size]
-    @size -= 1
+    @array[0] = @array.delete_at(@array.length - 1)
 
-    p = 0
-
-    while @array[p] > @array[smaller_child p]
-      @array[p], @array[smaller_child p] = @array[smaller_child p], @array[p]
-      p = smaller_child(p)
-    end
+    trickle_down 0
 
     data
+  end
+
+  private
+
+  def bubble_up(index)
+    while @array[parent(index)] > @array[index]
+      swap(index, parent(index))
+      index = parent(index)
+    end
+  end
+
+  def trickle_down(index)
+    while @array[index] > @array[smaller_child index]
+      swap(index, smaller_child(index))
+      index = smaller_child(index)
+    end
+  end
+
+  def swap(i, j)
+    @array[i], @array[j] = @array[j], @array[i]
   end
 
   def parent(index)
@@ -54,15 +69,11 @@ class Heap
     2 * index + 2
   end
 
-  def valid_index?(index)
-    index <= @size
-  end
-
   def smaller_child(index)
-    if valid_index?(right_child(index)) &&
+    if right_child(index) < @array.length &&
        @array[right_child index] < @array[left_child index]
       right_child(index)
-    elsif valid_index?(left_child(index))
+    elsif left_child(index) < @array.length
       left_child(index)
     else
       index
