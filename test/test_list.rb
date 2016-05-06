@@ -7,13 +7,13 @@ class TestList < Test::Unit::TestCase
   def test_empty
     list = List.new
 
-    assert_true(list.empty?)
+    assert(list.empty? == true)
   end
 
   def test_populated
     list = List.new(27)
 
-    assert_false(list.empty?)
+    assert(list.empty? == false)
   end
 
   def test_length_empty

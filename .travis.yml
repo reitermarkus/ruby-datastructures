@@ -1,0 +1,7 @@
+sudo: false
+
+language: ruby
+
+script:
+  - bundle exec rubocop
+  - rake test
