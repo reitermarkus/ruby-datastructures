@@ -61,5 +61,4 @@ class TestHeap < Test::Unit::TestCase
 
     assert_equal(heap.min, nil)
   end
-
 end
