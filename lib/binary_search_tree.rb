@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+# Binary Tree Node
 class BinaryTreeNode
   attr_accessor :key, :value, :left, :right
 
@@ -11,8 +12,8 @@ class BinaryTreeNode
   end
 end
 
+# Binary Search Tree
 class BinarySearchTree
-
   attr_accessor :root
 
   def initialize
@@ -30,18 +31,14 @@ class BinarySearchTree
   end
 
   def insert_node(root, node)
-    if node.key < root.key
-      if root.left.nil?
-        root.left = node
-      else
-        insert_node(root.left, node)
-      end
+    if node.key < root.key && root.left.nil?
+      root.left = node
+    elsif node.key < root.key
+      insert_node(root.left, node)
+    elsif root.right.nil?
+      root.right = node
     else
-      if root.right.nil?
-        root.right = node
-      else
-        insert_node(root.right, node)
-      end
+      insert_node(root.right, node)
     end
   end
 
