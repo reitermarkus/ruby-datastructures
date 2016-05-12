@@ -46,17 +46,13 @@ class TestBinarySeachTree < Test::Unit::TestCase
     tree = BinarySearchTree.new
 
     tree.insert(94, :strawberry)
-    tree.insert(33, :pineapple)
     tree.insert(48, :mango)
     tree.insert(18, :melon)
-    tree.insert(82, :apple)
 
     each = tree.each
 
     assert_equal(each.next, :melon)
-    assert_equal(each.next, :pineapple)
     assert_equal(each.next, :mango)
-    assert_equal(each.next, :apple)
     assert_equal(each.next, :strawberry)
   end
 
@@ -64,12 +60,19 @@ class TestBinarySeachTree < Test::Unit::TestCase
     tree = BinarySearchTree.new
 
     tree.insert(94, :strawberry)
-    tree.insert(33, :pineapple)
     tree.insert(48, :mango)
     tree.insert(18, :melon)
-    tree.insert(82, :apple)
 
-    assert_equal(tree.to_a, [:melon, :pineapple, :mango, :apple, :strawberry])
+    assert_equal(tree.to_a, [:melon, :mango, :strawberry])
   end
 
+  def test_sort
+    tree = BinarySearchTree.new
+
+    array = (1..100).to_a.shuffle
+
+    array.each { |x| tree.insert x, x }
+
+    assert_equal(tree.to_a, array.sort)
+  end
 end

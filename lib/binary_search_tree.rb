@@ -69,7 +69,7 @@ class BinarySearchTree
     end
   end
 
-  def each(&block)
+  def each
     return enum_for(:each) unless block_given?
     @root.each { |node| yield node.value }
   end
