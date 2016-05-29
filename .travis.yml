@@ -6,4 +6,4 @@ cache: bundler
 
 script:
   - bundle exec rubocop
-  - rake test
+  - bundle exec rake
