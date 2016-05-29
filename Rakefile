@@ -1,11 +1,14 @@
 #!/usr/bin/env ruby
 
+require 'rake/testtask'
+
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
-task default: %w(test)
+require 'coveralls'
+Coveralls.wear!
 
-require 'rake/testtask'
+task default: %w(test)
 
 Rake::TestTask.new do |t|
   t.libs << 'lib'
