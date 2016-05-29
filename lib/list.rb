@@ -19,24 +19,26 @@ class Node
     self
   end
 
-  def insert_before(data)
+  def insert(data, direction)
+    other_direction = direction == 'next' ? 'prev' : 'next'
+
     node = Node.new(data)
-    node.next = self
-    node.prev = @prev
+    node.public_send(other_direction + '=', self)
+    node.public_send(direction + '=', public_send(direction))
 
-    @prev.next = node unless @prev.nil?
+    unless public_send(direction).nil?
+      public_send(direction).public_send(other_direction + '=', node)
+    end
 
-    @prev = node
+    public_send(direction + '=', node)
+  end
+
+  def insert_before(data)
+    insert(data, 'prev')
   end
 
   def insert_after(data)
-    node = Node.new(data)
-    node.prev = self
-    node.next = @next
-
-    @next.prev = node unless @next.nil?
-
-    @next = node
+    insert(data, 'next')
   end
 
   def remove
