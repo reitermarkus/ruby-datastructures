@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 task default: %w(test)
 
 require 'rake/testtask'
