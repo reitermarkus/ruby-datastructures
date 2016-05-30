@@ -2,8 +2,8 @@
 
 # Heap
 class Heap
-  MINHEAP = -> (p, c) { p < c }
-  MAXHEAP = -> (p, c) { p > c }
+  MINHEAP = ->(p, c) { p < c }
+  MAXHEAP = ->(p, c) { p > c }
 
   def initialize(comp, *args)
     @comp = comp
