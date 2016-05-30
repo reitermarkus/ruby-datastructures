@@ -73,18 +73,4 @@ class BinarySearchTree
     return enum_for(:each) unless block_given?
     @root.each { |node| yield node.value }
   end
-
-  private
-
-  def insert_node(root, node)
-    if node.key < root.key && root.left.nil?
-      root.left = node
-    elsif node.key < root.key
-      insert_node(root.left, node)
-    elsif root.right.nil?
-      root.right = node
-    else
-      insert_node(root.right, node)
-    end
-  end
 end
