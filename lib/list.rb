@@ -13,29 +13,22 @@ class Node
 
   attr_accessor :data, :prev, :next
 
-  def initialize(data = nil)
+  def initialize(data = nil, p = nil, n = nil)
     @data = data
-    @prev = @next = nil
+    @prev = p
+    @next = n
     self
   end
 
   def insert_before(data)
-    node = Node.new(data)
-    node.next = self
-    node.prev = @prev
-
+    node = Node.new(data, @prev, self)
     @prev.next = node unless @prev.nil?
-
     @prev = node
   end
 
   def insert_after(data)
-    node = Node.new(data)
-    node.prev = self
-    node.next = @next
-
+    node = Node.new(data, self, @next)
     @next.prev = node unless @next.nil?
-
     @next = node
   end
 
