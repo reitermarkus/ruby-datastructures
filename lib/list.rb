@@ -61,7 +61,13 @@ end
 class List
   include Enumerable
 
-  attr_reader :length, :head, :tail
+  private
+
+  attr_reader :head, :tail
+
+  public
+
+  attr_reader :length
 
   def initialize(data = nil)
     @length = 0
@@ -113,6 +119,12 @@ class List
     @head = Node.new(data)
     @tail = @head
     @length = 1
+  end
+
+  def traverse(direction, method)
+    return enum_for(method) unless block_given?
+    return nil if send(direction).nil?
+    send(direction).public_send(method) { |node| yield node.data }
   end
 
   public
@@ -204,12 +216,4 @@ class List
     output.concat(']')
   end
   alias to_s inspect
-
-  private
-
-  def traverse(direction, method)
-    return enum_for(method) unless block_given?
-    return nil if send(direction).nil?
-    send(direction).public_send(method) { |node| yield node.data }
-  end
 end
