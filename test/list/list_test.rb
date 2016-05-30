@@ -237,4 +237,20 @@ class TestList < Test::Unit::TestCase
 
     assert_equal(list.to_s, '[66, 31, 19, 48]')
   end
+
+  def test_empty_array_to_list
+    array = []
+    list = array.to_l
+
+    assert_equal(array.class, Array)
+    assert_equal(list.class,  List)
+  end
+
+  def test_array_to_list
+    array = [0, 1, 2, 3]
+    list  = array.to_l
+
+    assert_equal(array.class, Array)
+    assert_equal(list.class,  List)
+  end
 end
