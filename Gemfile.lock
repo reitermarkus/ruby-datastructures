@@ -2,8 +2,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.2.0)
-    codeclimate-test-reporter (0.5.0)
-      simplecov (>= 0.7.1, < 1.0.0)
     coveralls (0.8.13)
       json (~> 1.8)
       simplecov (~> 0.11.0)
@@ -42,7 +40,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  codeclimate-test-reporter
   coveralls
   rake
   rubocop
