@@ -204,6 +204,12 @@ class TestList < Test::Unit::TestCase
     assert_equal(reverse_each.next, 66)
   end
 
+  def test_empty_to_a
+    list = List.new
+
+    assert_equal(list.to_a, [])
+  end
+
   def test_to_a
     list = List.new
 
@@ -213,6 +219,12 @@ class TestList < Test::Unit::TestCase
     list.append(48)
 
     assert_equal(list.to_a, [66, 31, 19, 48])
+  end
+
+  def test_empty_to_s
+    list = List.new
+
+    assert_equal(list.to_s, '[]')
   end
 
   def test_to_s
