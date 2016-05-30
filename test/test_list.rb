@@ -172,6 +172,38 @@ class TestList < Test::Unit::TestCase
     end
   end
 
+  def test_each
+    list = List.new
+
+    list.append(66)
+    list.append(31)
+    list.append(19)
+    list.append(48)
+
+    each = list.each
+
+    assert_equal(each.next, 66)
+    assert_equal(each.next, 31)
+    assert_equal(each.next, 19)
+    assert_equal(each.next, 48)
+  end
+
+  def test_reverse_each
+    list = List.new
+
+    list.append(66)
+    list.append(31)
+    list.append(19)
+    list.append(48)
+
+    reverse_each = list.reverse_each
+
+    assert_equal(reverse_each.next, 48)
+    assert_equal(reverse_each.next, 19)
+    assert_equal(reverse_each.next, 31)
+    assert_equal(reverse_each.next, 66)
+  end
+
   def test_to_a
     list = List.new
 
