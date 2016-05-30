@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'test_helper'
 require 'list'
-require 'test/unit'
 
 class TestList < Test::Unit::TestCase
   def test_empty

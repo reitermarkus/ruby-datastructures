@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'test_helper'
 require 'heap'
-require 'test/unit'
 
 class TestHeap < Test::Unit::TestCase
   def test_insert
