@@ -37,21 +37,22 @@ class Node
     @next.prev = @prev unless @next.nil?
   end
 
-  def each
-    return enum_for(:each) unless block_given?
-    node = self
-    until node.nil?
-      yield node
-      node = node.next
-    end
+  def each(&block)
+    traverse(:next, :each, &block)
   end
 
-  def reverse_each
-    return enum_for(:reverse_each) unless block_given?
+  def reverse_each(&block)
+    traverse(:prev, :reverse_each, &block)
+  end
+
+  private
+
+  def traverse(direction, method)
+    return enum_for(method) unless block_given?
     node = self
     until node.nil?
       yield node
-      node = node.prev
+      node = node.public_send(direction)
     end
   end
 end
@@ -189,11 +190,13 @@ class List
 
   def each
     return enum_for(:each) unless block_given?
+    return nil if @head.nil?
     @head.each { |node| yield node.data }
   end
 
   def reverse_each
     return enum_for(:reverse_each) unless block_given?
+    return nil if @tail.nil?
     @tail.reverse_each { |node| yield node.data }
   end
 
