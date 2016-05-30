@@ -76,6 +76,24 @@ class TestList < Test::Unit::TestCase
     assert_equal(list.get(3), 19)
   end
 
+  def test_insert_with_padding_nils
+    list = List.new
+
+    list.insert(9, 66)
+
+    assert_equal(list.length, 10)
+    assert_equal(list.get(0), nil)
+    assert_equal(list.get(1), nil)
+    assert_equal(list.get(2), nil)
+    assert_equal(list.get(3), nil)
+    assert_equal(list.get(4), nil)
+    assert_equal(list.get(5), nil)
+    assert_equal(list.get(6), nil)
+    assert_equal(list.get(7), nil)
+    assert_equal(list.get(8), nil)
+    assert_equal(list.get(9), 66)
+  end
+
   def test_first_last
     list = List.new(27)
 
