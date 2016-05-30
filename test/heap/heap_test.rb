@@ -3,9 +3,9 @@
 require 'test_helper'
 require 'heap'
 
-class TestHeap < Test::Unit::TestCase
+class TestMinHeap < Test::Unit::TestCase
   def test_insert
-    heap = Heap.new
+    heap = MinHeap.new
 
     heap.insert(33)
 
@@ -13,7 +13,7 @@ class TestHeap < Test::Unit::TestCase
   end
 
   def test_min
-    heap = Heap.new
+    heap = MinHeap.new
 
     heap.insert(94)
     heap.insert(33)
@@ -25,7 +25,7 @@ class TestHeap < Test::Unit::TestCase
   end
 
   def test_remove_min
-    heap = Heap.new
+    heap = MinHeap.new
 
     heap.insert(94)
     heap.insert(33)
@@ -39,25 +39,25 @@ class TestHeap < Test::Unit::TestCase
   end
 
   def test_create_from_array
-    heap = Heap.new([94, 33, 48, 18, 82])
+    heap = MinHeap.new([94, 33, 48, 18, 82])
 
     assert_equal(heap.min, 18)
   end
 
   def test_create_from_args
-    heap = Heap.new(94, 33, 48, 18, 82)
+    heap = MinHeap.new(94, 33, 48, 18, 82)
 
     assert_equal(heap.min, 18)
   end
 
   def test_create_single
-    heap = Heap.new(48)
+    heap = MinHeap.new(48)
 
     assert_equal(heap.min, 48)
   end
 
   def test_create_single_nil
-    heap = Heap.new(nil)
+    heap = MinHeap.new(nil)
 
     assert_equal(heap.min, nil)
   end

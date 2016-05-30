@@ -2,13 +2,16 @@
 
 # Heap
 class Heap
-  def initialize(*args)
-    if args.count == 1
-      if args[0].is_a? Enumerable
-        initialize_using_array args[0].to_a
-      else
-        @heap = [args[0]]
-      end
+  MINHEAP = -> (p, c) { p < c }
+  MAXHEAP = -> (p, c) { p > c }
+
+  def initialize(comp, *args)
+    @comp = comp
+
+    if args.count == 1 && args[0].is_a?(Enumerable)
+      initialize_using_array args[0].to_a
+    elsif args.count == 1
+      @heap = [args[0]]
     else
       initialize_using_array args
     end
@@ -23,12 +26,12 @@ class Heap
     self
   end
 
-  def min
+  def root
     @heap[0]
   end
 
-  def remove_min
-    data = min
+  def remove_root
+    data = root
 
     @heap[0] = @heap.delete_at(@heap.size - 1)
 
@@ -73,8 +76,12 @@ class Heap
     end
   end
 
+  def ordered?(parent, child)
+    @comp.call(parent, child)
+  end
+
   def unordered?(parent, child)
-    child < parent
+    !ordered?(parent, child)
   end
 
   def swap(i, j)
@@ -104,4 +111,22 @@ class Heap
   def right_child?(index)
     right_child(index) < @heap.size
   end
+end
+
+# MinHeap
+class MinHeap < Heap
+  def initialize(*args)
+    super(self.class.superclass::MINHEAP, *args)
+  end
+  alias min root
+  alias remove_min remove_root
+end
+
+# MaxHeap
+class MaxHeap < Heap
+  def initialize(*args)
+    super(self.class.superclass::MAXHEAP, *args)
+  end
+  alias max root
+  alias remove_max remove_root
 end
