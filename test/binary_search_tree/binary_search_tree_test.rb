@@ -30,6 +30,30 @@ class TestBinarySeachTree < Test::Unit::TestCase
     assert_equal(tree.find(18), :melon)
   end
 
+  def test_find_sorted
+    tree = BinarySearchTree.new
+
+    tree.insert(18, :melon)
+    tree.insert(33, :pineapple)
+    tree.insert(48, :mango)
+    tree.insert(82, :apple)
+    tree.insert(94, :strawberry)
+
+    assert_equal(tree.find(82), :apple)
+  end
+
+  def test_find_reverse_sorted
+    tree = BinarySearchTree.new
+
+    tree.insert(94, :strawberry)
+    tree.insert(82, :apple)
+    tree.insert(48, :mango)
+    tree.insert(33, :pineapple)
+    tree.insert(18, :melon)
+
+    assert_equal(tree.find(33), :pineapple)
+  end
+
   def test_find_not_in_tree
     tree = BinarySearchTree.new
 
