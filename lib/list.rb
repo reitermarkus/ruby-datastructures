@@ -61,7 +61,7 @@ end
 class List
   include Enumerable
 
-  attr_reader :length
+  attr_reader :length, :head, :tail
 
   def initialize(data = nil)
     @length = 0
@@ -188,16 +188,12 @@ class List
     @length == 0
   end
 
-  def each
-    return enum_for(:each) unless block_given?
-    return nil if @head.nil?
-    @head.each { |node| yield node.data }
+  def each(&block)
+    traverse(:head, :each, &block)
   end
 
-  def reverse_each
-    return enum_for(:reverse_each) unless block_given?
-    return nil if @tail.nil?
-    @tail.reverse_each { |node| yield node.data }
+  def reverse_each(&block)
+    traverse(:tail, :reverse_each, &block)
   end
 
   def inspect
@@ -208,4 +204,12 @@ class List
     output.concat(']')
   end
   alias to_s inspect
+
+  private
+
+  def traverse(direction, method)
+    return enum_for(method) unless block_given?
+    return nil if send(direction).nil?
+    send(direction).public_send(method) { |node| yield node.data }
+  end
 end
