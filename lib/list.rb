@@ -1,61 +1,7 @@
 #!/usr/bin/env ruby
 
-# Extend array class with a to_l method.
-class Array
-  def to_l
-    List.new(self)
-  end
-end
-
-# Double Linked Node
-class Node
-  include Enumerable
-
-  attr_accessor :data, :prev, :next
-
-  def initialize(data = nil, p = nil, n = nil)
-    @data = data
-    @prev = p
-    @next = n
-    self
-  end
-
-  def insert_before(data)
-    node = Node.new(data, @prev, self)
-    @prev.next = node unless @prev.nil?
-    @prev = node
-  end
-
-  def insert_after(data)
-    node = Node.new(data, self, @next)
-    @next.prev = node unless @next.nil?
-    @next = node
-  end
-
-  def remove
-    @prev.next = @next unless @prev.nil?
-    @next.prev = @prev unless @next.nil?
-  end
-
-  def each(&block)
-    traverse(:next, :each, &block)
-  end
-
-  def reverse_each(&block)
-    traverse(:prev, :reverse_each, &block)
-  end
-
-  private
-
-  def traverse(direction, method)
-    return enum_for(method) unless block_given?
-    node = self
-    until node.nil?
-      yield node
-      node = node.public_send(direction)
-    end
-  end
-end
+require 'list/conversions'
+require 'list/node'
 
 # Doubly Linked List
 class List
@@ -116,7 +62,7 @@ class List
   end
 
   def add_first_node(data)
-    @head = Node.new(data)
+    @head = DoubleLinkedNode.new(data)
     @tail = @head
     @length = 1
   end
