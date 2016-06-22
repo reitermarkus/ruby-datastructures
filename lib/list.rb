@@ -130,9 +130,7 @@ class List
   alias []= set
 
   def delete(index)
-    node = get_node(index)
-
-    node.remove
+    node = get_node(index).remove
 
     @head = @head.next if node == @head
     @tail = @tail.prev if node == @tail

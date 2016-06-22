@@ -28,6 +28,7 @@ class DoubleLinkedNode
   def remove
     @prev.next = @next unless @prev.nil?
     @next.prev = @prev unless @next.nil?
+    self
   end
 
   def each(&block)
