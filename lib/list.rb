@@ -17,15 +17,10 @@ class List
 
   def initialize(data = nil)
     @length = 0
+    @head = nil
+    @tail = nil
 
-    if data.nil?
-      @head = nil
-      @tail = nil
-    elsif data.class == Array
-      data.each { |e| append e }
-    else
-      add_first_node(data)
-    end
+    [*data].each(&method(:append))
 
     self
   end
