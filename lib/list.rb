@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'list/conversions'
-require 'list/node'
+require 'doubly_linked_node'
 
 # Doubly Linked List
 class List
