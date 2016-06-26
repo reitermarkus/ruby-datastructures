@@ -1,8 +1,17 @@
-require 'doubly_linked_node'
-
 # Stack
 class Stack
   attr_reader :size
+
+  Struct.new('StackItem', :data, :subitem) do
+    def each
+      return enum_for(:each) unless block_given?
+      item = self
+      until item.nil?
+        yield item
+        item = item.subitem
+      end
+    end
+  end
 
   def initialize(data = nil)
     @size = 0
@@ -14,7 +23,7 @@ class Stack
   end
 
   def push(data)
-    @top = @top.nil? ? DoubleLinkedNode.new(data) : @top.insert_after(data)
+    @top = Struct::StackItem.new(data, @top)
 
     @size += 1
 
@@ -24,15 +33,15 @@ class Stack
   def pop
     data = top
 
-    @top = @top.remove.prev
-
+    @top = @top.subitem
     @size -= 1
 
     data
   end
 
   def top
-    @top.data unless size.zero?
+    raise(IndexError, 'stack is empty') if empty?
+    @top.data
   end
 
   def empty?
@@ -42,7 +51,7 @@ class Stack
   def to_s
     string = ''
     unless @top.nil?
-      @top.reverse_each.with_index do |e, i|
+      @top.each.with_index do |e, i|
         string.prepend(', ') if i > 0
         string.prepend(e.data.to_s)
       end
