@@ -71,9 +71,7 @@ class Heap
   end
 
   def bottom_up_heapsort
-    parent(@heap.size - 1).downto(0).each do |x|
-      trickle_down x
-    end
+    parent(@heap.size - 1).downto(0).each(&method(:trickle_down))
   end
 
   def ordered?(parent, child)
