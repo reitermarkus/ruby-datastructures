@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # Stack
 class Stack
   attr_reader :size
