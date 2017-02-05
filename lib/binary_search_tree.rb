@@ -59,14 +59,13 @@ class BinarySearchTree
     else
       @root.insert(key, value)
     end
+
+    self
   end
 
   def find(key)
-    if @root.nil?
-      nil
-    else
-      @root.find(key)
-    end
+    return nil if @root.nil?
+    @root.find(key)
   end
 
   def each

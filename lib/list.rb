@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 
-require 'list/conversions'
-require 'doubly_linked_node'
+require_relative 'list/conversions'
+require_relative 'doubly_linked_node'
 
 # Doubly Linked List
 class List
   include Enumerable
+  include Comparable
 
   private
 
@@ -82,7 +83,7 @@ class List
   end
 
   def insert(index, data)
-    if index == 0
+    if index.zero?
       prepend(data)
     elsif index < @length
       get_node(index).insert_before(data)
@@ -121,6 +122,7 @@ class List
 
   def set(index, data)
     get_node(index).data = data
+    self
   end
   alias []= set
 
@@ -136,7 +138,7 @@ class List
   end
 
   def empty?
-    @length == 0
+    @length.zero?
   end
 
   def each(&block)
@@ -147,12 +149,17 @@ class List
     traverse(:tail, :reverse_each, &block)
   end
 
+  def ==(other)
+    each.zip(other.each).lazy.all? { |v1, v2| v1 == v2 }
+  end
+  alias eql? ==
+
   def inspect
-    output = '['
+    output = '('
     each.with_index do |data, i|
-      output.concat(i == 0 ? data.inspect : ', ' << data.inspect)
+      output.concat(i.zero? ? data.inspect : ', ' << data.inspect)
     end
-    output.concat(']')
+    output.concat(')')
   end
   alias to_s inspect
 end

@@ -15,11 +15,11 @@ class Stack
     end
   end
 
-  def initialize(data = nil)
+  def initialize(*data)
     @size = 0
     @top = nil
 
-    [*data].each(&method(:push))
+    data.each(&method(:push))
 
     self
   end

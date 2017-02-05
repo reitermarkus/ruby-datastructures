@@ -1,12 +1,15 @@
 #!/usr/bin/env ruby
 
-require 'rake/testtask'
+require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
 
-Rake::TestTask.new do |task|
-  task.libs << 'lib'
-  task.libs << 'test'
-  task.test_files = FileList['test/**/*_test.rb']
-  task.verbose = true
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = '--color --format documentation'
 end
 
-task default: %w(test)
+RuboCop::RakeTask.new do |task|
+  task.requires << 'rubocop-rspec'
+  task.options << '--display-cop-names'
+end
+
+task default: %w(rubocop spec)

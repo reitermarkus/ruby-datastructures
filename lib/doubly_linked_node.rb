@@ -3,6 +3,7 @@
 # Double Linked Node
 class DoubleLinkedNode
   include Enumerable
+  include Comparable
 
   attr_accessor :data, :prev, :next
 
@@ -29,6 +30,10 @@ class DoubleLinkedNode
     @prev.next = @next unless @prev.nil?
     @next.prev = @prev unless @next.nil?
     self
+  end
+
+  def <=>(other)
+    data <=> other.data
   end
 
   def each(&block)

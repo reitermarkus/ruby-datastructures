@@ -1,6 +1,15 @@
+require: rubocop-rspec
+
 Metrics/ClassLength:
   Max: 200
 
 Style/Documentation:
   Exclude:
-    - 'test/**/*'
+    - 'spec/**/*_spec.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
