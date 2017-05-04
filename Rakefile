@@ -3,8 +3,8 @@
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = '--color --format documentation'
+RSpec::Core::RakeTask.new(:spec) do |task|
+  task.rspec_opts = '--color --format documentation'
 end
 
 RuboCop::RakeTask.new do |task|
@@ -12,4 +12,4 @@ RuboCop::RakeTask.new do |task|
   task.options << '--display-cop-names'
 end
 
-task default: %w(rubocop spec)
+task default: %w[rubocop spec]
